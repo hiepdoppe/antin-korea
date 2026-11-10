@@ -1,0 +1,2 @@
+# Netlify: mọi đường dẫn không có file tĩnh → index.html (để /admin và các route SPA hoạt động)
+/*    /index.html   200
