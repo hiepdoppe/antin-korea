@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom'
+import { withBase } from '@/lib/base'
 import { motion } from 'framer-motion'
 import { ASSETS } from '@/constants/assets'
 import { cn } from '@/lib/cn'
@@ -58,7 +59,7 @@ export default function AdminLayout() {
     <div className="min-h-screen bg-navy-50/60 lg:grid lg:grid-cols-[16.5rem_1fr]">
       <aside className="border-b border-navy-100 bg-white lg:sticky lg:top-0 lg:h-screen lg:border-b-0 lg:border-r">
         <div className="flex items-center justify-between gap-3 px-4 py-3 lg:flex-col lg:items-stretch lg:gap-6 lg:px-5 lg:py-6">
-          <a href="/admin" className="flex items-center gap-2.5">
+          <a href={withBase('/admin')} className="flex items-center gap-2.5">
             <img src={ASSETS.logo.mark} alt="" className="h-10 w-10 object-contain" />
             <span className="leading-tight">
               <span className="block font-display text-base text-navy-900">AN TÍN KOREA</span>
@@ -90,7 +91,7 @@ export default function AdminLayout() {
           </nav>
 
           <div className="hidden space-y-1 border-t border-navy-100 pt-4 lg:block">
-            <a href="/" target="_blank" rel="noreferrer" className="block rounded-xl px-3.5 py-2 text-sm font-medium text-navy-600 transition-colors hover:bg-navy-50 hover:text-navy-900">
+            <a href={withBase('/')} target="_blank" rel="noreferrer" className="block rounded-xl px-3.5 py-2 text-sm font-medium text-navy-600 transition-colors hover:bg-navy-50 hover:text-navy-900">
               Xem trang web ↗
             </a>
             <button type="button" onClick={logout} className="block w-full rounded-xl px-3.5 py-2 text-left text-sm font-medium text-navy-600 transition-colors hover:bg-navy-50 hover:text-navy-900">
@@ -103,7 +104,7 @@ export default function AdminLayout() {
       <main className="min-w-0 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
         <Outlet />
         <div className="mt-10 flex gap-4 text-xs text-navy-400 lg:hidden">
-          <a href="/" target="_blank" rel="noreferrer">Xem trang web ↗</a>
+          <a href={withBase('/')} target="_blank" rel="noreferrer">Xem trang web ↗</a>
           <button type="button" onClick={logout}>Đăng xuất</button>
         </div>
       </main>

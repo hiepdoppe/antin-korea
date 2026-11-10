@@ -1,5 +1,7 @@
 /** Tỉ lệ rộng/cao của từng ảnh thật – dùng để giữ chỗ (aspect-ratio) và tránh layout shift. Sinh tự động từ public/assets. */
-export const AR: Record<string, number> = {
+import { withBase } from '@/lib/base'
+
+const RAW: Record<string, number> = {
   '/assets/facilities/bathroom-1.jpg': 0.75,
   '/assets/facilities/bathroom-2.jpg': 0.75,
   '/assets/facilities/classroom-door-1.jpg': 0.75,
@@ -68,3 +70,6 @@ export const AR: Record<string, number> = {
   '/assets/universities/partners-grid.png': 1.4031,
   '/assets/universities/yuhan-meeting.jpg': 0.75,
 }
+
+/** Khóa theo đường dẫn đã gắn base, khớp với ASSETS. */
+export const AR: Record<string, number> = Object.fromEntries(Object.entries(RAW).map(([k, v]) => [withBase(k), v]))

@@ -3,7 +3,9 @@
  * C:\Users\super\Downloads\duhocantin vào public/assets/).
  * UI chỉ dùng đường dẫn từ file này – không hard-code đường dẫn ảnh trong component.
  */
-const a = (path: string) => `/assets/${path}`
+import { withBase } from '@/lib/base'
+
+const a = (path: string) => withBase(`/assets/${path}`)
 
 export const ASSETS = {
   logo: {

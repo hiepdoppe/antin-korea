@@ -1,4 +1,5 @@
 import { Fragment, useMemo } from 'react'
+import { withBase } from '@/lib/base'
 import { Link, useParams } from 'react-router-dom'
 import { Breadcrumb } from '@/components/site/Breadcrumb'
 import { CtaBand } from '@/components/site/CtaBand'
@@ -69,7 +70,7 @@ function Article({ slug }: { slug: string }) {
           {a.cover && (
             <figure className="mx-auto mt-8 max-w-4xl overflow-hidden rounded-3xl border border-navy-100 bg-navy-50 shadow-card">
               <div className="aspect-[16/9]">
-                <img src={a.cover} alt={a.coverAlt || t.title} className="h-full w-full object-cover" />
+                <img src={withBase(a.cover)} alt={a.coverAlt || t.title} className="h-full w-full object-cover" />
               </div>
             </figure>
           )}

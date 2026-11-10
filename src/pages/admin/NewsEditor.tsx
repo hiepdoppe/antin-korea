@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { withBase } from '@/lib/base'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { PageHeader } from '@/components/admin/PageHeader'
 import { ConfirmButton } from '@/components/ui/ConfirmButton'
@@ -221,7 +222,7 @@ export default function NewsEditor() {
             </Field>
             {a.cover && (
               <div className="mt-3 aspect-[16/9] overflow-hidden rounded-xl border border-navy-100 bg-navy-50">
-                <img src={a.cover} alt="" className="h-full w-full object-cover" />
+                <img src={withBase(a.cover)} alt="" className="h-full w-full object-cover" />
               </div>
             )}
           </div>

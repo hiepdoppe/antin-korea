@@ -32,10 +32,19 @@ const SITE = (env.SITE_URL || env.VITE_SITE_URL || '').replace(/\/$/, '')
 
 // ---------- nạp file TypeScript dữ liệu ----------
 function loadTs(rel) {
-  const src = fs.readFileSync(path.join(root, rel), 'utf8')
+  const file = path.join(root, rel)
+  const src = fs.readFileSync(file, 'utf8')
   const js = ts.transpileModule(src, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText
   const m = { exports: {} }
-  new Function('module', 'exports', js)(m, m.exports)
+  // cho phép import tương đối giữa các file dữ liệu (vd koDefaults → koContent); import kiểu/alias '@/' chỉ là type nên bỏ qua
+  const req = (spec) => {
+    if (spec.startsWith('.')) {
+      const abs = path.resolve(path.dirname(file), spec)
+      return loadTs(path.relative(root, fs.existsSync(`${abs}.ts`) ? `${abs}.ts` : abs))
+    }
+    return {}
+  }
+  new Function('module', 'exports', 'require', js)(m, m.exports, req)
   return m.exports
 }
 const { initialContent } = loadTs('src/data/initialContent.ts')
@@ -209,6 +218,8 @@ for (const lang of ['vi', 'ko']) {
 }
 
 // robots.txt
+// GitHub Pages: đường dẫn không có file tĩnh (vd /admin, bài viết mới) → 404.html chính là SPA
+fs.copyFileSync(path.join(dist, 'index.html'), path.join(dist, '404.html'))
 fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /admin\n${SITE ? `\nSitemap: ${SITE}/sitemap.xml\n` : ''}`)
 
 // sitemap.xml (cần tên miền tuyệt đối)

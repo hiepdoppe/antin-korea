@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
+import { withBase } from '@/lib/base'
 import { motion } from 'framer-motion'
 import { ASSETS } from '@/constants/assets'
 import { Button } from '@/components/ui/Button'
@@ -92,7 +93,7 @@ export default function AdminGate({ children }: { children: ReactNode }) {
         <Button type="submit" size="lg" className="mt-5 w-full">
           Đăng nhập
         </Button>
-        <a href="/" className="mt-4 block text-center text-xs font-medium text-navy-500 transition-colors hover:text-navy-800">
+        <a href={withBase('/')} className="mt-4 block text-center text-xs font-medium text-navy-500 transition-colors hover:text-navy-800">
           ← Về trang chủ
         </a>
       </motion.form>

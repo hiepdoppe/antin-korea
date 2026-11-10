@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { withBase } from '@/lib/base'
 import { ASSETS } from '@/constants/assets'
 import { ROUTES } from '@/constants/routes'
 import { useContent } from '@/hooks/useContent'
@@ -17,7 +18,7 @@ export function NewsCard({ a }: { a: Article }) {
         <div className="aspect-[16/9] overflow-hidden bg-navy-50">
           {a.cover ? (
             <img
-              src={a.cover}
+              src={withBase(a.cover)}
               alt={a.coverAlt || t.title}
               loading="lazy"
               decoding="async"

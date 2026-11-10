@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { withBase } from '@/lib/base'
 import { ASSETS } from '@/constants/assets'
 import { NAV_KEYS, ROUTES } from '@/constants/routes'
 import { useContent } from '@/hooks/useContent'
@@ -71,7 +72,7 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {brand.nameVi}
           </p>
-          <a href="/admin" className="transition-colors hover:text-gold-300">
+          <a href={withBase('/admin')} className="transition-colors hover:text-gold-300">
             {ui.common.admin}
           </a>
         </div>
