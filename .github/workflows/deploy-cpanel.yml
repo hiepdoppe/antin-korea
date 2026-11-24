@@ -1,7 +1,5 @@
 name: Deploy to cPanel
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 concurrency:
   group: cpanel
